@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>양지회중</title>
+    <link rel="shortcut icon" href="//t1.daumcdn.net/kakaotv/2016/favicon/kakaotv_favicon.ico">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -23,7 +24,7 @@ var TV_KAKAO_URL
 var  handler = function (data) {
     console.log(data.table.rows[0].c[0].v);
     TV_KAKAO_URL = data.table.rows[0].c[0].v
-    window.location.href = TV_KAKAO_URL
+    // window.location.href = TV_KAKAO_URL
 } 
   
 var jsonp = function (url) {
