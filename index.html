@@ -10,21 +10,22 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   </head>
   <body>
-
-  <article class="panel is-warning">
-    <p class="panel-heading">
-      양지회중
-    </p>
-  </article>
+    <section class="section">
+      <div class="container">
+        <h1 class="title">양지회중</h1>
+        <button class="button is-warning is-active" onclick="play()">집회 영상 보기</button>
+      </div>
+    </section>
   </body>
 </html>
 <script>
+var load = false
 var TV_KAKAO_URL
 
 var  handler = function (data) {
     console.log(data.table.rows[0].c[0].v);
     TV_KAKAO_URL = data.table.rows[0].c[0].v
-    window.location.href = TV_KAKAO_URL
+    // window.location.href = TV_KAKAO_URL
 } 
   
 var jsonp = function (url) {
@@ -66,6 +67,9 @@ var query = function (sql, sheetName, callback) {
 
 query('SELECT *', 'url', 'handler');
 
+var play = function () {
+    window.location.href = TV_KAKAO_URL
+}
 
 </script>
 
