@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>양지회중</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+
+  <article class="panel is-warning">
+    <p class="panel-heading">
+      양지회중
+    </p>
+  </article>
+  </body>
+</html>
+<script>
+var TV_KAKAO_URL
+
+var  handler = function (data) {
+    console.log(data.table.rows[0].c[0].v);
+    TV_KAKAO_URL = data.table.rows[0].c[0].v
+    window.location.href = TV_KAKAO_URL
+} 
+  
+var jsonp = function (url) {
+    var script = window.document.createElement('script');
+    script.async = true;
+    script.src = url;
+    script.onerror = function () {
+        alert('Can not access JSONP file.')
+    };
+    var done = false;
+    script.onload = script.onreadystatechange = function () {
+        if (!done && (!this.readyState || this.readyState === 'loaded' || this.readyState ===
+                'complete')) {
+            done = true;
+            script.onload = script.onreadystatechange = null;
+            if (script.parentNode) {
+                return script.parentNode.removeChild(script);
+            }
+        }
+    };
+    window.document.getElementsByTagName('head')[0].appendChild(script);
+};
+
+var query = function (sql, sheetName, callback) {
+    var myKey = '10RnFLYJWaS5BSeWGl4EBgohDzGRuq3XVVPF0_T8AZlw'
+    var url = 'https://docs.google.com/spreadsheets/d/'+myKey+'/gviz/tq?',
+    params = {
+        tq: encodeURIComponent(sql),
+        sheet: encodeURIComponent(sheetName),
+        tqx: 'responseHandler:' + callback
+    },
+    qs = [];
+    for (var key in params) {
+        qs.push(key + '=' + params[key]);
+    }
+    url += qs.join('&');
+    return jsonp(url); // Call JSONP helper function
+}
+
+query('SELECT *', 'url', 'handler');
+
+
+</script>
+
+
