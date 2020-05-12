@@ -15,7 +15,7 @@
       <div class="container" id="app">
         <h1 class="title">양지회중</h1>
         <div v-for="row in sheet" class="buttons">
-          <button class="button is-warning is-active" @click="play(row.c[0].v)">{{ row.c[2].v }}</button>
+          <button class="button is-warning is-active is-large" @click="play(row.c[0].v)">{{ row.c[2].v }}</button>
           <div class="tags has-addons">
             <span class="tag is-large">비밀번호</span>
             <span class="tag is-black is-large">{{ row.c[1].v }}</span>
