@@ -8,24 +8,42 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   </head>
   <body>
     <section class="section">
-      <div class="container">
+      <div class="container" id="app">
         <h1 class="title">양지회중</h1>
-        <button class="button is-warning is-active" onclick="play()">집회 영상 보기</button>
+        <div v-for="row in sheet" class="buttons">
+          <button class="button is-warning is-active" @click="play(row.c[0].v)">{{ row.c[2].v }}</button>
+          <div class="tags has-addons">
+            <span class="tag is-large">비밀번호</span>
+            <span class="tag is-black is-large">{{ row.c[1].v }}</span>
+          </div>
+        </div>
       </div>
     </section>
   </body>
 </html>
 <script>
-var load = false
-var TV_KAKAO_URL
-
+var app = new Vue({
+  el: '#app',
+  data: {
+    sheet: null
+  },
+  methods: {
+    play: function (url) {
+      window.location.href = url
+    }
+  }
+})
 var  handler = function (data) {
+    console.log(data.table);
     console.log(data.table.rows[0].c[0].v);
-    TV_KAKAO_URL = data.table.rows[0].c[0].v
-    // window.location.href = TV_KAKAO_URL
+    console.log(data.table.rows[1].c[1].v);
+    console.log(data.table.rows[2].c[2].v);
+    // url_ = data.table.rows[0].c[0].v
+    app.$data.sheet = data.table.rows;
 } 
   
 var jsonp = function (url) {
@@ -66,10 +84,6 @@ var query = function (sql, sheetName, callback) {
 }
 
 query('SELECT *', 'url', 'handler');
-
-var play = function () {
-    window.location.href = TV_KAKAO_URL
-}
 
 </script>
 
