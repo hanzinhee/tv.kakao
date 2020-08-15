@@ -39,9 +39,6 @@ var app = new Vue({
 })
 var  handler = function (data) {
     console.log(data.table);
-    console.log(data.table.rows[0].c[0].v);
-    console.log(data.table.rows[1].c[1].v);
-    console.log(data.table.rows[2].c[2].v);
     // url_ = data.table.rows[0].c[0].v
     app.$data.sheet = data.table.rows;
 } 
